@@ -35,13 +35,13 @@ public class Main {
             list.add(i, (int) (Math.random() * 100));
         }
 
+        List<Integer> list2 = list.stream()
+                .filter(a -> a % 2 == 0)
+                .toList();
+
         System.out.println("В списке " + list + " " +
-                list.stream()
-                        .filter(a -> a % 2 == 0)
-                        .count() + " четных элемента и они равны " +
-                list.stream()
-                        .filter(a -> a % 2 == 0)
-                        .toList());
+                list2.size() + " четных элемента и они равны " +
+                list2);
     }
 
 
