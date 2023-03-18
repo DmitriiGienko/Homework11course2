@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
@@ -48,11 +49,12 @@ public class Main {
     public static <T> void findMinMax(Stream<? extends T> stream,
                                       Comparator<? super T> order,
                                       BiConsumer<? super T, ? super T> minMaxConsumer) {
-        List<T> list = (List<T>) stream.sorted(order).toList();
+        List<T> list = stream.sorted(order).collect(Collectors.toList());
         T minValue = list.get(0);
         T maxValue = list.get(list.size() - 1);
-
-        minMaxConsumer.accept(minValue, maxValue);
+        if (list.isEmpty()) {
+            minMaxConsumer.accept(null, null);
+        } else minMaxConsumer.accept(minValue, maxValue);
     }
 
 
